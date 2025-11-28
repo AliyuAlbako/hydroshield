@@ -26,6 +26,7 @@ export default function AdminPanel(){
     try {
       const res = await api.post("/send-alert", { state, message });
       alert("Alert processed. Check console or results.");
+      return res
     } catch (err) {
       alert("Failed to send alert");
     }
