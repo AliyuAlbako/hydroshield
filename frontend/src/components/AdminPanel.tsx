@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import api, { setAuthToken } from "../api";
 
 export default function AdminPanel(){

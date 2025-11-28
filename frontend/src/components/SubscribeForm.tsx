@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import api from "../api";
 
 export default function SubscribeForm(){
@@ -6,12 +6,14 @@ export default function SubscribeForm(){
   const [state,setState] = useState("");
   const [msg, setMsg] = useState("");
 
-  const submit = async (e) => {
+  const submit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
       const res = await api.post("/subscribe", { phone, state });
       setMsg("Subscribed! You will receive alerts.");
-      setPhone(""); setState("");
+      setPhone(phone); 
+      setState(state);
+      return res;
     } catch (err) {
       setMsg("Failed to subscribe.");
     }
