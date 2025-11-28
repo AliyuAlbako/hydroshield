@@ -1,5 +1,5 @@
 import React from 'react';
-import StateRiskList from '../components/StateRiskList';
+import StateRiskList from '..//components/StateRiskList';
 import SmsAlert from '../components/SmsAlert';
 export default function Dashboard(){
   return (

@@ -1,5 +1,5 @@
-import React from 'react';
-export default function StateRiskCard({name, risk}){
+
+export default function StateRiskCard({name, risk}:{name:string, risk:string}){
   const color = risk === 'High' ? '#e53935' : risk === 'Medium' ? '#fb8c00' : '#43a047';
   return (
     <div style={{padding:12, borderRadius:8, border:'1px solid #eee', marginBottom:10}}>

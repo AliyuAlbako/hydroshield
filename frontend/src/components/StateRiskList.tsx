@@ -1,4 +1,4 @@
-import React from 'react';
+
 import StateRiskCard from './StateRiskCard';
 import { nigeriaStates } from '../data/states';
 export default function StateRiskList(){
