@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import api from "../src/api";
+import api from "../api";
 
 export default function SubscribeForm(){
   const [phone,setPhone] = useState("");

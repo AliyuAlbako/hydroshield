@@ -10,10 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
     "axios": "^1.6.7",
     "leaflet": "^1.9.4",
+    "or": "^0.2.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.18.0"
   },

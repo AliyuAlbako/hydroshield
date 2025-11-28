@@ -8,7 +8,7 @@ export default function AdminPanel(){
   const [state, setState] = useState("");
   const [message, setMessage] = useState("");
 
-  const login = async (e) => {
+  const login = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
       const res = await api.post("/auth/login", { username: user, password: pass });
@@ -21,7 +21,7 @@ export default function AdminPanel(){
     }
   };
 
-  const sendAlert = async (e) => {
+  const sendAlert = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
       const res = await api.post("/send-alert", { state, message });
