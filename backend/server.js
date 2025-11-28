@@ -17,7 +17,9 @@ app.use("/api/auth", require("./routes/auth"));
 app.use("/api/states", require("./routes/states"));
 app.use("/api/flood-risk", require("./routes/risk"));
 app.use("/api/subscribe", require("./routes/subscribe"));
-app.use("/api", require("./routes/alerts"));
+// app.use("/api", require("./routes/alerts"));
+app.use("/api/alerts", require("./routes/alerts"));
+
 
 // health
 app.get("/", (req, res) => res.send("HydroShield API running"));

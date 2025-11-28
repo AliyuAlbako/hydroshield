@@ -1,29 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
-const Subscriber = require("../models/Subscriber");
-const { sendSMS } = require("../utils/sms");
+const sendSMS = require("../utils/sms");
 
-// POST /api/send-alert
-// body: { state: "Lagos", message: "Custom message" }
-router.post("/send-alert", auth, async (req, res) => {
-  const { state, message } = req.body;
-  if (!state) return res.status(400).json({ message: "state required" });
+// TEST ROUTE TO SEND SMS
+router.post("/send-sms", async (req, res) => {
+    const { phone, message } = req.body;
 
-  const subs = await Subscriber.find({ state });
-  if (!subs.length) return res.json({ message: "no subscribers in state", recipients: [] });
-
-  const results = [];
-  for (const s of subs) {
-    try {
-      const r = await sendSMS(s.phone, message || `⚠️ Flood Alert: ${state} is at risk. Please take precautions. - HydroShield`);
-      results.push({ phone: s.phone, result: "ok" });
-    } catch (err) {
-      results.push({ phone: s.phone, result: "failed", error: err.message });
+    if (!phone || !message) {
+        return res.status(400).json({ error: "phone and message are required" });
     }
-  }
 
-  res.json({ message: "alerts sent", recipients: results });
+    try {
+        const response = await sendSMS(phone, message);
+        res.json({ success: true, response });
+    } catch (error) {
+        res.status(500).json({ error: "Failed to send SMS", details: error });
+    }
 });
 
 module.exports = router;

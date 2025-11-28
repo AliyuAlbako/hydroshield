@@ -1,29 +1,24 @@
-const provider = process.env.SMS_PROVIDER || "mock";
+const africastalking = require("africastalking");
 
-async function sendSMSMock(phone, message) {
-  console.log(`[MOCK SMS] To: ${phone} | Message: ${message}`);
-  return { success: true };
+const client = africastalking({
+    apiKey: process.env.AT_API_KEY,
+    username: process.env.AT_USERNAME
+});
+
+const sms = client.SMS;
+
+async function sendSMS(to, message) {
+    try {
+        const response = await sms.send({
+            to: [to],
+            message
+        });
+
+        return response;
+    } catch (error) {
+        console.error("SMS Error:", error);
+        throw error;
+    }
 }
 
-async function sendSMS(phone, message) {
-  if (provider === "mock") {
-    return sendSMSMock(phone, message);
-  }
-  // Twilio or Africa's Talking can be plugged in here:
-  if (provider === "twilio") {
-    const Twilio = require("twilio");
-    const client = new Twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-    return client.messages.create({ body: message, from: process.env.TWILIO_FROM, to: phone });
-  }
-  if (provider === "africastalking") {
-    const africastalking = require("africastalking")({
-      apiKey: process.env.AT_API_KEY,
-      username: process.env.AT_USERNAME
-    });
-    const sms = africastalking.SMS;
-    return sms.send({ to: [phone], message });
-  }
-  return sendSMSMock(phone, message);
-}
-
-module.exports = { sendSMS };
+module.exports = sendSMS;
